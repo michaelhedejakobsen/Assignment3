@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *14.		 	OUTPUT - Dialog box PROMPT it is the wrong user name
  *15.			INCREMENT attempt
  *16. END LOOP
- *17. CONDITION - IF the inputName is the same as uname OR inputPass is the same as pass AND attempt = 2
+ *17. CONDITION - IF the inputName is NOT the same as uname OR inputPass is NOT the same as pass AND attempt = 2
  *18. 	OUTPUT - Dialog box PROMPT user that account is locked
  *19.	EXIT program
  *20. Create array of strings: choices
@@ -99,8 +99,11 @@ public class Part1 {
 
 		}while(attempt<=2);
 		
-		//CONDITION - IF the inputName is the same as uname OR inputPass is the same as pass AND attempt = 2
-		if(!inputPass.equals(pass) || !uname.equals(inputName) && attempt==2)
+		//Boolean = inputName is NOT the same as uname OR inputPass is NOT the same as pass AND attempt = 2
+		boolean allNotOk = (!inputPass.equals(pass) || !uname.equals(inputName) && attempt==2);
+		
+		//CONDITION - IF allNotOk is true
+		if (allNotOk)
 		{
 			//OUTPUT - Dialog box PROMPT user that account is locked
 			JOptionPane.showMessageDialog(null,"Your account has been locked - Contact Administrator");	
@@ -118,7 +121,7 @@ public class Part1 {
 			accountType=(String)JOptionPane.showInputDialog(null, "Choose account type...","Account Type",JOptionPane.QUESTION_MESSAGE, null,choices,choices[1]);
 		
 			//SWITCH CASE - based on accountType
-			switch(accountType)
+			switch (accountType)
 			{
 				//CASE - accountType = Admin
 				case "Admin":
