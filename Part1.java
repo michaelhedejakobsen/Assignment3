@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  *14.		 	OUTPUT - Dialog box PROMPT it is the wrong user name
  *15.			INCREMENT attempt
  *16. END LOOP
- *17. CONDITION - IF the inputName is NOT the same as uname OR inputPass is NOT the same as pass AND attempt = 2
+ *17. CONDITION - IF the inputName is the same as uname OR inputPass is the same as pass AND attempt = 2
  *18. 	OUTPUT - Dialog box PROMPT user that account is locked
  *19.	EXIT program
  *20. Create array of strings: choices
@@ -30,18 +30,14 @@ import javax.swing.JOptionPane;
  *22. 		Cast accountType to String - Dialog box with drop down list - PROMPT user for selection
  *23. 		SWITCH CASE - based on accountType
  *24.			CASE - accountType = Admin
- *25.				CONDITION - IF the accountType is the same as accountMichael
- *26.					OUTPUT - Dialog box PROMPT "Welcome Admin"
+ *25.					QUIT the loop
+ *26.			CASE - accountType = Student
  *27.					QUIT the loop
- *28.			CASE - accountType = Student
- *29.				CONDITION - IF the accountType is the same as accountMichael
- *30.					OUTPUT - Dialog box PROMPT "Welcome Student"
- *31.					QUIT the loop
- *32.			CASE - accountType = Staff
- *33.				CONDITION - IF the accountType is the same as accountMichael
- *34.					OUTPUT - Dialog box PROMPT "Welcome Staff"
- *35.					QUIT the loop
- *36. EXIT the program
+ *28.			CASE - accountType = Staff
+ *29.					QUIT the loop
+ *30.	END LOOP
+ *31.OUTPUT - Dialog box PROMPT "Welcome Student"
+ *32. EXIT the program
  */
 public class Part1 {
 
@@ -99,11 +95,8 @@ public class Part1 {
 
 		}while(attempt<=2);
 		
-		//Boolean = inputName is NOT the same as uname OR inputPass is NOT the same as pass AND attempt = 2
-		boolean allNotOk = (!inputPass.equals(pass) || !uname.equals(inputName) && attempt==2);
-		
-		//CONDITION - IF allNotOk is true
-		if (allNotOk)
+		//CONDITION - IF the inputName is the same as uname OR inputPass is the same as pass AND attempt = 2
+		if(!inputPass.equals(pass) || !uname.equals(inputName) && attempt==2)
 		{
 			//OUTPUT - Dialog box PROMPT user that account is locked
 			JOptionPane.showMessageDialog(null,"Your account has been locked - Contact Administrator");	
@@ -121,40 +114,23 @@ public class Part1 {
 			accountType=(String)JOptionPane.showInputDialog(null, "Choose account type...","Account Type",JOptionPane.QUESTION_MESSAGE, null,choices,choices[1]);
 		
 			//SWITCH CASE - based on accountType
-			switch (accountType)
+			switch (accountMichael)
 			{
 				//CASE - accountType = Admin
-				case "Admin":
-					//CONDITION - IF the accountType is the same as accountMichael
-					if(accountType.equalsIgnoreCase(accountMichael))
-					{
-						//OUTPUT - Dialog box PROMPT "Welcome Admin"
-						JOptionPane.showMessageDialog(null,"Welcome Admin");
-						//QUIT the loop	
+				case "admin":
 						break;	
-					}
+
 				//CASE - accountType = Student
-				case "Student":
-					//CONDITION - IF the accountType is the same as accountMichael
-					if(accountType.equalsIgnoreCase(accountMichael))
-					{
-						//OUTPUT - Dialog box PROMPT "Welcome Student"
-						JOptionPane.showMessageDialog(null,"Welcome Student");
-						//QUIT the loop	
+				case "student":
 						break;
-					}
+						
 				//CASE - accountType = Staff
-				case "Staff":
-					//CONDITION - IF the accountType is the same as accountMichael
-					if(accountType.equalsIgnoreCase(accountMichael))
-					{
-						//OUTPUT - Dialog box PROMPT "Welcome Staff"
-						JOptionPane.showMessageDialog(null,"Welcome Staff");
-						//QUIT the loop	
+				case "staff":
 						break;
-					}
 			}
 		}while(!accountMichael.equalsIgnoreCase(accountType));
+		
+		JOptionPane.showMessageDialog(null,"Welcome " + accountType);
 		//EXIT the program
 		System.exit(attempt=3);
 	}
